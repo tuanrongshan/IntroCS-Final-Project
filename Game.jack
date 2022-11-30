@@ -1,0 +1,23 @@
+class Game {
+
+    field Array normalStairs;
+
+    constructor Game new() {
+        var int h;
+        var int i;
+        let normalStairs = Array.new(5);
+        let h = 213;
+        let i = 0;
+
+        do NormalStair.init();
+
+        while(i< 5) {
+            do LCGRandom.setSeed(h*(i+10));
+            let normalStairs[i] = NormalStair.new(h);
+            let h = h - LCGRandom.randRange(40, 55);
+            let i = i + 1;
+        }
+
+        return this;
+    }
+}

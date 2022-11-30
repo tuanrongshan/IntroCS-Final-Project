@@ -1,0 +1,66 @@
+class NormalStair {
+
+    static int W, H; // Constant int width and height
+    static int frameGap; // Constant int minimum gap length from frame to stairs
+    static int yShift;
+    field int xPos, yPos; // Screen location of the stair's top-left corner
+
+    // Initialize global values W, H
+    function void init() {
+        let W = 100;
+        let H = 10;
+        let frameGap = 50;
+        return;
+    }
+
+    // Up shift stairs
+    function void shift(int s) {
+        let yShift = s;
+        return;
+    }
+
+    // Construct a new Normal Stair
+    constructor NormalStair new(int y) {
+        do reset(y);
+        return this;
+    }
+
+    // Dispose this normal stair
+    method void dispose() {
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    // Draw stair
+    method void draw() {
+        do Screen.setColor(true);
+        do Screen.drawRectangle(xPos, yPos-H, xPos+W, yPos);
+        return;
+    }
+
+    // Clear stair
+    method void clear() {
+        do Screen.setColor(false);
+        do Screen.drawRectangle(xPos, yPos-H, xPos+W, yPos);
+        return;
+    }
+
+    // Update new state
+    method void update() {
+        if (yShift > 0) {
+            do clear();
+            let yPos = yPos + yShift;
+            let yShift = 0;
+            do draw();
+        }
+        return;
+    }
+
+    // Reset
+    method void reset(int y) {
+        let xPos = LCGRandom.randRange(frameGap, 500-W-frameGap);
+        let yPos = y;
+        do draw();
+        return;
+    }
+}
