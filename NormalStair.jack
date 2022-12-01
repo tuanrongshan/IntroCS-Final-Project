@@ -3,7 +3,9 @@ class NormalStair {
     static int W, H; // Constant int width and height
     static int frameGap; // Constant int minimum gap length from frame to stairs
     static int yShift;
+    static int respeed; //the reciprocal of speed of rising stairs
     field int xPos, yPos; // Screen location of the stair's top-left corner
+    field int tick; // internal clock
 
     // Initialize global values W, H
     function void init() {
@@ -14,10 +16,10 @@ class NormalStair {
     }
 
     // Up shift stairs
-    function void shift(int s) {
-        let yShift = s;
-        return;
-    }
+    // function void shift(int s) {
+    //     let yShift = s;
+    //     return;
+    // }
 
     // Construct a new Normal Stair
     constructor NormalStair new(int y) {
@@ -33,25 +35,42 @@ class NormalStair {
 
     // Draw stair
     method void draw() {
+        var int t, d;
         do Screen.setColor(true);
-        do Screen.drawRectangle(xPos, yPos-H, xPos+W, yPos);
+        let t = Math.min(Math.max(yPos, 0),511);
+        let d = Math.min(Math.max(yPos+H, 0),511);
+        // do Screen.drawRectangle(xPos, yPos, xPos+W, yPos+H);
+        do Screen.drawRectangle(xPos, t, xPos+W, d);
         return;
     }
 
     // Clear stair
     method void clear() {
+        var int t, d;
         do Screen.setColor(false);
-        do Screen.drawRectangle(xPos, yPos-H, xPos+W, yPos);
+        let t = Math.min(Math.max(yPos, 0),511);
+        let d = Math.min(Math.max(yPos+H, 0),511);
+        // do Screen.drawRectangle(xPos, yPos, xPos+W, yPos+H);
+        do Screen.drawRectangle(xPos, t, xPos+W, d);
         return;
     }
 
     // Update new state
     method void update() {
-        if (yShift > 0) {
+        // clock?
+        // sys.wait(5)?
+        let tick = tick + 1;
+        if (tick = respeed) {let tick = 0;}
+        if ((tick = 0) & (yShift > 0)) {
             do clear();
             let yPos = yPos + yShift;
             let yShift = 0;
             do draw();
+            if (yPos < (-50)) {
+                // let coin = true;
+                let yPos = 260;
+                let xPos = LCGRandom.randRange(0, 511-W);
+            }
         }
         return;
     }
@@ -60,7 +79,18 @@ class NormalStair {
     method void reset(int y) {
         let xPos = LCGRandom.randRange(frameGap, 500-W-frameGap);
         let yPos = y;
+        let tick = -1;
         do draw();
         return;
+    }
+
+    method boolean stand_on(int x1, int x2, int y) {
+        // y:the bottom of the player
+        // x1/x2:left & right
+        if ((y = (yPos+1)) & (x2>xPos) & (x1<(xPos+W))){
+            return true;
+        } else {
+            return false;
+        }
     }
 }
