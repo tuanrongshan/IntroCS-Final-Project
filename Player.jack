@@ -1,0 +1,113 @@
+class Player {
+
+    static int step;
+    static int boundLeft, boundRight;
+    static int boundBottom;
+    static int yVel;
+    field int xPos, yPos;
+    field int position;
+    field boolean gravity;
+
+    // Initialize global variables : boundary, step, and falling velocity
+    function void init() {
+        let boundLeft = 10;
+        let boundRight = 300;
+        let boundBottom = 250;
+        let step = 2;
+        let yVel = 4;
+        return;
+    }
+
+    // Construct new: (x, y) be left-bottom corner
+    constructor Player new(int x, int y) {
+        do reset(x, y);
+        return this;
+    }
+
+    // Dispose
+    method void dispose() {
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    // Move Left
+    method void left() {
+        if ((xPos - step) > boundLeft) {
+            let xPos = xPos - step;
+            let position = position - (step / 16);
+        }
+        else {
+            let xPos = boundLeft;
+            let position = (yPos * 32) + (boundLeft / 16);
+        }
+        return;
+    }
+
+    // Move Right
+    method void right() {
+        if ((xPos + step) < boundRight) {
+            let xPos = xPos + step;
+            let position = position + (step / 16);
+        }
+        else {
+            let xPos = boundRight;
+            let position = (yPos * 32) + (boundRight / 16);
+        }
+        return;
+    }
+
+    // Stop falling
+    method void stop() {
+        if (gravity) {
+            let gravity = false;
+        }
+        return;
+    }
+
+    // Clock
+    method void tick() {
+        if (gravity) {
+            if ((yVel > 0) & (yPos < (boundBottom - yVel))) {
+                let yPos = yPos + yVel;
+                let position = position + (yVel * 32);
+            }
+            // *** If player falls to the bottom, should we end game?
+        }
+        else {
+            let gravity = true;
+        }
+        return;
+    }
+
+    // Update status
+    method void update() {
+        do tick();
+        do draw();
+        return;
+    }
+
+    method void draw() {
+        do child.draw(position);
+        return;
+    }
+
+    // Return x position
+    method int x() {
+        return xPos;
+    }
+
+    // Return y position
+    method int y() {
+        return yPos;
+    }
+
+    // Reset status
+    method void reset(int x, int y) {
+        let xPos = x;
+        let yPos = y;
+        let position = (y * 32) + (x / 16);
+        let gravity = true;
+        do draw();
+        return;
+    }
+}

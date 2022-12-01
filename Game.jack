@@ -1,6 +1,14 @@
 class Game {
 
+    static int childH, childW;
     field Array normalStairs;
+    field Player player;
+
+    function void init() {
+        let childH = 23;
+        let childW = 20;
+        return;
+    }
 
     constructor Game new() {
         var int h;
@@ -10,6 +18,9 @@ class Game {
         let i = 0;
 
         do NormalStair.init();
+        do Player.init();
+
+        let player = Player.new(0+childW, 250-childH);
 
         while(i< 5) {
             do LCGRandom.setSeed(h*(i+10));
