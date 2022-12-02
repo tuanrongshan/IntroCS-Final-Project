@@ -6,12 +6,16 @@ class NormalStair {
     static int respeed; //the reciprocal of speed of rising stairs
     field int xPos, yPos; // Screen location of the stair's top-left corner
     field int tick; // internal clock
+    // field int style; //1:normal 2:spring 3:spikes
+
+    //score: the number of stairs the player passed?
 
     // Initialize global values W, H
-    function void init() {
+    function void init(int irespeed) {
         let W = 100;
         let H = 10;
         let frameGap = 50;
+        let respeed = irespeed;
         return;
     }
 
@@ -84,13 +88,13 @@ class NormalStair {
         return;
     }
 
-    method boolean stand_on(int x1, int x2, int y) {
+    method int stand_on(int x1, int x2, int y) {
         // y:the bottom of the player
         // x1/x2:left & right
         if ((y = (yPos+1)) & (x2>xPos) & (x1<(xPos+W))){
-            return true;
+            return 1; //normal stair
         } else {
-            return false;
+            return 0;
         }
     }
 }
