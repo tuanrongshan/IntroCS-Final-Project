@@ -4,7 +4,7 @@ class Main {
         var Game game;
         do Game.init();
         let game = Game.new();
-        do Sys.wait(500);
+        do game.run();
         return;
     }
 }

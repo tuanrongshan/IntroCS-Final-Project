@@ -3,10 +3,13 @@ class Game {
     static int childH, childW;
     field Array normalStairs;
     field Player player;
+    field char key;
 
     function void init() {
         let childH = 23;
         let childW = 20;
+        do NormalStair.init();
+        do Player.init();
         return;
     }
 
@@ -17,12 +20,9 @@ class Game {
         let h = 213;
         let i = 0;
 
-        do NormalStair.init();
-        do Player.init();
+        let player = Player.new(0+childW, childH);
 
-        let player = Player.new(0+childW, 250-childH);
-
-        while(i< 5) {
+        while (i < 5) {
             do LCGRandom.setSeed(h*(i+10));
             let normalStairs[i] = NormalStair.new(h);
             let h = h - LCGRandom.randRange(40, 55);
@@ -30,5 +30,57 @@ class Game {
         }
 
         return this;
+    }
+
+    method void dispose() {
+        var int i;
+
+        do player.dispose();
+        let i = 0;
+        while (i < 5) {
+            do normalStairs.dispose();
+            let i = i + 1;
+        }
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    // Input from Keyboard
+    method void keyboardInput() {
+        let key = Keyboard.keyPressed();
+
+        // Left Arrow
+        if (key = 130) {
+            do player.left();
+        }
+
+        // Right Arrow
+        if (key = 132) {
+            do player.right();
+        }
+
+        return;
+    }
+
+    method void refresh() {
+        var int i;
+
+        do player.update();
+        let i = 0;
+        while (i < 5) {
+            // do normalStairs[i].update();
+            let i = i + 1;
+        }
+
+        return;
+    }
+
+    method void run() {
+        while (true) {
+            do keyboardInput();
+            do refresh();
+            do Sys.wait(100);
+        }
+        return;
     }
 }
