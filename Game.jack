@@ -2,6 +2,7 @@ class Game {
 
     static int childH, childW;
     field Array normalStairs;
+    field HP hp;
     field Player player;
     field char key;
 
@@ -21,10 +22,12 @@ class Game {
         let i = 0;
 
         let player = Player.new(0+childW, childH);
+
+        let hp = HP.new(320, 40);
+
         do SpikesAbove.draw(0);
         do SpikesAbove.draw(10);
-        do SpikesAbove.draw(20);
-        do SpikesAbove.drawlasttwo(30);
+        do SpikesAbove.drawlasttwo(20);
 
         while (i < 5) {
             do LCGRandom.setSeed(h*(i+10));

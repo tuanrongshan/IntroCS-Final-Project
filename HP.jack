@@ -1,0 +1,45 @@
+class HP{
+    field int xPos, yPos;
+    field int position;
+    field int point; //HP: 0~12
+    constructor HP new(int x, int y){
+        var int i;
+        let xPos = x;
+        let yPos = y;
+        let position = (y*32)+(x/16);
+        let i = 0;
+        let point = 12;
+        do HealthBar.drawleft(position);
+        while (i < 12){
+            do HealthBar.drawmid(i+position);
+            do HealthBar.drawHP(i+position);
+            let i = i+1;
+        }
+        // do HealthBar.drawright(12+position);
+        return this;
+    }
+    method boolean injure (int damage){
+        // true: HP>0  false: HP=0
+        var int i;
+        let i = damage;
+        while ((point > 0) & (i > 0)){
+            do HealthBar.eraseHP(point+position-1);
+            let point = point-1;
+            let i = i-1;
+        }
+        // do Output.println();
+        // do Output.printInt(point);
+        if (point > 0) {return 1;}
+        else {return 0;}
+    }
+    method void heal (int blood){
+        var int i;
+        let i = blood;
+        while ((point < 13) & (i > 0)){
+            let point = point+1;
+            do HealthBar.drawHP(point+position-1);
+            let i = i-1;
+        }
+        return;
+    }
+}
