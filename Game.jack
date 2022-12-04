@@ -1,10 +1,13 @@
 class Game {
 
     static int childH, childW;
-    field Array normalStairs;
+    // field Array normalStairs;
+    field NormalStair s0, s1, s2, s3, s4, s5;
     field HP hp;
     field Player player;
     field char key;
+    field boolean exit;
+    field int score;
 
     function void init() {
         let childH = 23;
@@ -17,24 +20,33 @@ class Game {
     constructor Game new() {
         var int h;
         var int i;
-        let normalStairs = Array.new(5);
-        let h = 213;
+        // let normalStairs = Array.new(5);
+        // let h = 213;
+        let h = 258;
         let i = 0;
 
+        let exit = 0;
+        let score = 0;
+
         let player = Player.new(0+childW, childH);
+        let hp = HP.new(312, 60, 16, 20);
 
         do map.draw();
 
-        let hp = HP.new(312, 60, 16, 20);
-        do hp.injure(8);
-        do hp.heal(3);
+        // while (i < 5) {
+        //     do LCGRandom.setSeed(h*(i+10));
+        //     let normalStairs[i] = NormalStair.new(h);
+        //     let h = h - LCGRandom.randRange(40, 55);
+        //     let i = i + 1;
+        // }
 
-        while (i < 5) {
-            do LCGRandom.setSeed(h*(i+10));
-            let normalStairs[i] = NormalStair.new(h);
-            let h = h - LCGRandom.randRange(40, 55);
-            let i = i + 1;
-        }
+        do LCGRandom.setSeed(h*(i+10));
+        let s0 = NormalStair.new(h);
+        let s1 = NormalStair.new(h-45);
+        let s2 = NormalStair.new(h-90);
+        let s3 = NormalStair.new(h-135);
+        let s4 = NormalStair.new(h-180);
+        let s5 = NormalStair.new(h-225);
 
         return this;
     }
@@ -44,11 +56,17 @@ class Game {
 
         do player.dispose();
         do hp.dispose();
-        let i = 0;
-        while (i < 5) {
-            do normalStairs.dispose();
-            let i = i + 1;
-        }
+        // let i = 0;
+        // while (i < 5) {
+        //     do normalStairs.dispose();
+        //     let i = i + 1;
+        // }
+        do s0.dispose();
+        do s1.dispose();
+        do s2.dispose();
+        do s3.dispose();
+        do s4.dispose();
+        do s5.dispose();
         do Memory.deAlloc(this);
         return;
     }
@@ -72,19 +90,25 @@ class Game {
 
     method void refresh() {
         var int i;
-
         do player.update();
         let i = 0;
-        while (i < 5) {
-            // do normalStairs[i].update();
-            let i = i + 1;
-        }
+        // while (i < 5) {
+        //     do normalStairs[i].update();
+        //     let i = i + 1;
+        // }
+        do s0.update();
+        do s1.update();
+        do s2.update();
+        do s3.update();
+        do s4.update();
+        do s5.update();
+        do map.draw();
 
         return;
     }
 
     method void run() {
-        while (true) {
+        while (~exit) {
             do keyboardInput();
             do refresh();
             do Sys.wait(100);

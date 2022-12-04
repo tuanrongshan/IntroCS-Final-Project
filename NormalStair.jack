@@ -18,6 +18,7 @@ class NormalStair {
         let frameGap = 50;
         let respeed = irespeed;
         let boundRight = 300-W;
+        let yShift = 16;
         return;
     }
 
@@ -42,11 +43,13 @@ class NormalStair {
     // Draw stair
     method void draw() {
         var int t, d;
-        do Screen.setColor(true);
-        let t = Math.min(Math.max(yPos, 0),511);
-        let d = Math.min(Math.max(yPos+H, 0),511);
-        // do Screen.drawRectangle(xPos, yPos, xPos+W, yPos+H);
-        do Screen.drawRectangle(xPos, t, xPos+W, d);
+        if (yPos < 512){
+            do Screen.setColor(true);
+            let t = Math.min(Math.max(yPos, 0),255);
+            let d = Math.min(Math.max(yPos+H, 0),255);
+            // do Screen.drawRectangle(xPos, yPos, xPos+W, yPos+H);
+            do Screen.drawRectangle(xPos, t, xPos+W, d);
+        }
         return;
     }
 
@@ -54,8 +57,8 @@ class NormalStair {
     method void clear() {
         var int t, d;
         do Screen.setColor(false);
-        let t = Math.min(Math.max(yPos, 0),511);
-        let d = Math.min(Math.max(yPos+H, 0),511);
+        let t = Math.min(Math.max(yPos, 0),255);
+        let d = Math.min(Math.max(yPos+H, 0),255);
         // do Screen.drawRectangle(xPos, yPos, xPos+W, yPos+H);
         do Screen.drawRectangle(xPos, t, xPos+W, d);
         return;
@@ -63,21 +66,20 @@ class NormalStair {
 
     // Update new state
     method void update() {
-        // clock?
-        // sys.wait(5)?
         let tick = tick + 1;
         if (tick = respeed) {let tick = 0;}
-        if ((tick = 0) & (yShift > 0)) {
+        // if ((tick = 0) & (yShift > 0)) {
+        if (tick = 0){
             do clear();
-            let yPos = yPos + yShift;
-            let yShift = 0;
-            do draw();
-            if (yPos < (-50)) {
+            let yPos = yPos - yShift;
+            // let yShift = 0;
+            if (yPos < 10) {
                 // let coin = true;
-                let yPos = 260;
-                let xPos = LCGRandom.randRange(0, 511-W);
+                let yPos = 258;
+                let xPos = LCGRandom.randRange(0, boundRight);
             }
         }
+        do draw();
         return;
     }
 
@@ -86,7 +88,7 @@ class NormalStair {
         // let xPos = LCGRandom.randRange(frameGap, 500-W-frameGap);
         let xPos = LCGRandom.randRange(0, boundRight);
         let yPos = y;
-        let tick = -1;
+        let tick = 0;
         do draw();
         return;
     }
