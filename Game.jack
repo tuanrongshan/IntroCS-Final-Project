@@ -23,11 +23,11 @@ class Game {
 
         let player = Player.new(0+childW, childH);
 
-        let hp = HP.new(320, 40);
+        do map.draw();
 
-        do SpikesAbove.draw(0);
-        do SpikesAbove.draw(10);
-        do SpikesAbove.drawlasttwo(20);
+        let hp = HP.new(312, 60, 16, 20);
+        do hp.injure(8);
+        do hp.heal(3);
 
         while (i < 5) {
             do LCGRandom.setSeed(h*(i+10));
@@ -43,6 +43,7 @@ class Game {
         var int i;
 
         do player.dispose();
+        do hp.dispose();
         let i = 0;
         while (i < 5) {
             do normalStairs.dispose();

@@ -1,6 +1,6 @@
 class SpikesAbove{
     // 10*10
-    function void draw(int location) {
+    function void draw10(int location) {
         var int memAddress; 
         let memAddress = 16384+location;
         // column 0

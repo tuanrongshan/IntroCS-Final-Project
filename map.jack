@@ -1,0 +1,11 @@
+class map{
+    function void draw(){
+        do SpikesAbove.draw10(0);
+        do SpikesAbove.draw10(10);
+        do Screen.setColor(false);
+        do Screen.drawRectangle(300, 0, 511, 10);
+        do Screen.setColor(true);
+        do Screen.drawRectangle(300, 0, 301, 255);
+        return;
+    }
+}

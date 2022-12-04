@@ -1,29 +1,34 @@
 class HP{
     field int xPos, yPos;
-    field int position;
     field int point; //HP: 0~12
-    constructor HP new(int x, int y){
+    field int slotlength, height;
+    constructor HP new(int x, int y, int l, int h){
         var int i;
         let xPos = x;
         let yPos = y;
-        let position = (y*32)+(x/16);
+        let slotlength = l;
+        let height = h;
         let i = 0;
         let point = 12;
-        do HealthBar.drawleft(position);
+        do HealthBar.drawHPslots(x, y, 16, 23);
         while (i < 12){
-            do HealthBar.drawmid(i+position);
-            do HealthBar.drawHP(i+position);
+            do HealthBar.drawHP(x+1+(i*slotlength), y, slotlength, height);
             let i = i+1;
         }
         // do HealthBar.drawright(12+position);
         return this;
     }
+    method void dispose() {
+        do Memory.deAlloc(this);
+        return;
+    }
+
     method boolean injure (int damage){
         // true: HP>0  false: HP=0
         var int i;
         let i = damage;
         while ((point > 0) & (i > 0)){
-            do HealthBar.eraseHP(point+position-1);
+            do HealthBar.eraseHP(xPos+1+((point-1)*slotlength), yPos, slotlength, height);
             let point = point-1;
             let i = i-1;
         }
@@ -37,7 +42,7 @@ class HP{
         let i = blood;
         while ((point < 13) & (i > 0)){
             let point = point+1;
-            do HealthBar.drawHP(point+position-1);
+            do HealthBar.drawHP(xPos+1+((point-1)*slotlength), yPos, slotlength, height);
             let i = i-1;
         }
         return;

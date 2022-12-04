@@ -2,6 +2,7 @@ class NormalStair {
 
     static int W, H; // Constant int width and height
     static int frameGap; // Constant int minimum gap length from frame to stairs
+    static int boundRight;
     static int yShift;
     static int respeed; //the reciprocal of speed of rising stairs
     field int xPos, yPos; // Screen location of the stair's top-left corner
@@ -12,10 +13,11 @@ class NormalStair {
 
     // Initialize global values W, H
     function void init(int irespeed) {
-        let W = 100;
+        let W = 70;
         let H = 10;
         let frameGap = 50;
         let respeed = irespeed;
+        let boundRight = 300-W;
         return;
     }
 
@@ -81,7 +83,8 @@ class NormalStair {
 
     // Reset
     method void reset(int y) {
-        let xPos = LCGRandom.randRange(frameGap, 500-W-frameGap);
+        // let xPos = LCGRandom.randRange(frameGap, 500-W-frameGap);
+        let xPos = LCGRandom.randRange(0, boundRight);
         let yPos = y;
         let tick = -1;
         do draw();

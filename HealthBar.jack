@@ -1,23 +1,40 @@
 class HealthBar{
-    // (1+12*16+0)*23
-    function void drawHP (int position) {
-        var int x, y;
-        let y = (position/32);
-        let x = ((position-(y*32))*16)+3;
-        let y = y+3;
+    function void drawHP (int x, int y, int slotlength, int height) {
         do Screen.setColor(true);
-        do Screen.drawRectangle(x, y, x+9, y+16);
+        do Screen.drawRectangle(x+3, y+4, x+slotlength-4, y+height-3);
         return;
     }
-    function void eraseHP (int position) {
-        var int x, y;
-        let y = (position/32);
-        let x = ((position-(y*32))*16)+3;
-        let y = y+3;
+    function void eraseHP (int x, int y, int slotlength, int height) {
         do Screen.setColor(false);
-        do Screen.drawRectangle(x, y, x+9, y+16);
+        do Screen.drawRectangle(x+3, y+4, x+slotlength-4, y+height-3);
         return;
     }
+    // function void eraseHP (int position) {
+    //     var int x, y;
+    //     let y = (position/32);
+    //     let x = ((position-(y*32))*16)+3;
+    //     let y = y+3;
+    //     do Screen.setColor(false);
+    //     do Screen.drawRectangle(x, y, x+9, y+16);
+    //     return;
+    // }
+    function void drawHPslots(int x, int y, int slotlength, int height){
+        var int i;
+        let i = 0;
+        do Screen.setColor(true);
+        do Screen.drawRectangle(x, y, x, y+height-1);
+        do Screen.drawRectangle(x, y, x+(12*slotlength)+1, y+1);
+        do Screen.drawRectangle(x, y+height-2, x+(12*slotlength)+1, y+height-1);
+        do Screen.drawRectangle(x+1+(12*slotlength), y, x+1+(12*slotlength), y+height-1);
+        while (i < 12){
+            do Screen.drawRectangle(x+1+(i*slotlength), y+2, x+1+(i*slotlength), y+height-3);
+            do Screen.drawRectangle(x+((i+1)*slotlength), y+2, x+((i+1)*slotlength), y+height-3);
+            let i = i+1;
+        }
+        return;
+    }
+    /*
+    // (1+12*16+0)*23
     function void drawleft(int location) {
         var int memAddress; 
         let memAddress = 16384+location;
@@ -104,4 +121,5 @@ class HealthBar{
         do Memory.poke(memAddress +704, 1);
         return;
     }
+    */
 }
