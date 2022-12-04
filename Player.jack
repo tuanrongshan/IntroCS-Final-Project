@@ -7,6 +7,7 @@ class Player {
     static int childH, childW;
     field int xPos, yPos;
     field int position;
+    field int tick;
     field boolean gravity;
 
     // Initialize global variables : boundary, step, and falling velocity
@@ -15,7 +16,7 @@ class Player {
         let boundRight = 300;
         let boundBottom = 250;
         let step = 16;
-        let yVel = 4;
+        let yVel = 3;
         let childH = 23;
         let childW = 20;
         return;
@@ -24,6 +25,7 @@ class Player {
     // Construct new: (x, y) be left-bottom corner
     constructor Player new(int x, int y) {
         do reset(x, y);
+        let tick = 0;
         return this;
     }
 
@@ -61,6 +63,7 @@ class Player {
         return;
     }
 
+    /*
     // Stop falling
     method void stop() {
         if (gravity) {
@@ -68,28 +71,40 @@ class Player {
         }
         return;
     }
+    */
 
     // Clock
-    method void tick() {
-        if (gravity) {
+    method boolean fall() {
+        let tick = tick + 1;
+        if (tick = 1) {let tick = 0;}
+        // if ((tick = 0) & (yShift > 0)) {
+        if (tick = 0){
+            if ((yPos + yVel + 1) > (boundBottom - childH)) {return false;}
             if ((yVel > 0) & (yPos < (boundBottom - childH - yVel))) {
                 let yPos = yPos + yVel;
                 let position = position + (yVel * 32);
             }
-            // *** If player falls to the bottom, should we end game?
         }
-        else {
-            let gravity = true;
-        }
-        return;
+        // if (gravity) {
+        //     if ((yVel > 0) & (yPos < (boundBottom - childH - yVel))) {
+        //         let yPos = yPos + yVel;
+        //         let position = position + (yVel * 32);
+        //     }
+        // }
+        // else {
+        //     let gravity = true;
+        // }
+        return true;
     }
 
     // Update status
-    method void update() {
+    method boolean update() {
+        var int rt;
+    // method void update(int standon) {
         do erase();
-        do tick();
+        let rt = fall();
         do draw();
-        return;
+        return rt;
     }
 
     method void erase() {

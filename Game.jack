@@ -8,11 +8,12 @@ class Game {
     field char key;
     field boolean exit;
     field int score;
+    field int tick;
 
     function void init() {
         let childH = 23;
         let childW = 20;
-        do NormalStair.init(8);
+        do NormalStair.init(1);
         do Player.init();
         return;
     }
@@ -27,6 +28,7 @@ class Game {
 
         let exit = 0;
         let score = 0;
+        let tick = 0;
 
         let player = Player.new(0+childW, childH);
         let hp = HP.new(312, 60, 16, 20);
@@ -74,23 +76,27 @@ class Game {
     // Input from Keyboard
     method void keyboardInput() {
         let key = Keyboard.keyPressed();
+        if ((tick = 0) & (key = 0)) {return;}
+        if (tick = 5){let tick = 0;}
+        if (tick = 0){
+            // Left Arrow
+            if (key = 130) {
+                do player.left();
+            }
 
-        // Left Arrow
-        if (key = 130) {
-            do player.left();
+            // Right Arrow
+            if (key = 132) {
+                do player.right();
+            }
         }
-
-        // Right Arrow
-        if (key = 132) {
-            do player.right();
-        }
-
+        let tick = tick+1;
         return;
     }
 
     method void refresh() {
         var int i;
-        do player.update();
+        // do player.update();
+        let exit = (~(player.update()));
         let i = 0;
         // while (i < 5) {
         //     do normalStairs[i].update();
@@ -111,7 +117,7 @@ class Game {
         while (~exit) {
             do keyboardInput();
             do refresh();
-            do Sys.wait(100);
+            do Sys.wait(20);
         }
         return;
     }
