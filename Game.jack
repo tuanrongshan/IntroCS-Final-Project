@@ -23,14 +23,14 @@ class Game {
         var int i;
         // let normalStairs = Array.new(5);
         // let h = 213;
-        let h = 258;
+        let h = 280;
         let i = 0;
 
         let exit = 0;
         let score = 0;
         let tick = 0;
 
-        let player = Player.new(0+childW, childH);
+        let player = Player.new(160, h-225-childH-1); //x: multiple of 16
         let hp = HP.new(312, 60, 16, 20);
 
         do map.draw();
@@ -43,12 +43,12 @@ class Game {
         // }
 
         do LCGRandom.setSeed(h*(i+10));
-        let s0 = NormalStair.new(h);
-        let s1 = NormalStair.new(h-45);
-        let s2 = NormalStair.new(h-90);
-        let s3 = NormalStair.new(h-135);
-        let s4 = NormalStair.new(h-180);
-        let s5 = NormalStair.new(h-225);
+        let s0 = NormalStair.first(h-225);
+        let s1 = NormalStair.new(h);
+        let s2 = NormalStair.new(h-45);
+        let s3 = NormalStair.new(h-90);
+        let s4 = NormalStair.new(h-135);
+        let s5 = NormalStair.new(h-180);
 
         return this;
     }
@@ -94,22 +94,21 @@ class Game {
     }
 
     method void refresh() {
-        var int i;
-        // do player.update();
-        let exit = (~(player.update()));
-        let i = 0;
-        // while (i < 5) {
-        //     do normalStairs[i].update();
-        //     let i = i + 1;
-        // }
-        do s0.update();
-        do s1.update();
-        do s2.update();
-        do s3.update();
-        do s4.update();
-        do s5.update();
+        var int xl, xr, yd;
+        let xl = player.x();
+        let xr = player.x()+childW-1;
+        let yd = player.y()+childH-1;
+        do s0.update(xl, xr, yd);
+        do s1.update(xl, xr, yd);
+        do s2.update(xl, xr, yd);
+        do s3.update(xl, xr, yd);
+        do s4.update(xl, xr, yd);
+        do s5.update(xl, xr, yd);
+        if (~(player.update())){
+            do hp.injure(30);
+        }
+        let exit = ~hp.live();
         do map.draw();
-
         return;
     }
 

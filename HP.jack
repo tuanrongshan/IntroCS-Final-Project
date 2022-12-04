@@ -47,4 +47,8 @@ class HP{
         }
         return;
     }
+    method boolean live (){
+        if (point > 0) {return true;}
+        return false;
+    }
 }

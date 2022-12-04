@@ -1,12 +1,12 @@
 class HealthBar{
     function void drawHP (int x, int y, int slotlength, int height) {
         do Screen.setColor(true);
-        do Screen.drawRectangle(x+3, y+4, x+slotlength-4, y+height-3);
+        do Screen.drawRectangle(x+3, y+4, x+slotlength-4, y+height-2);
         return;
     }
     function void eraseHP (int x, int y, int slotlength, int height) {
         do Screen.setColor(false);
-        do Screen.drawRectangle(x+3, y+4, x+slotlength-4, y+height-3);
+        do Screen.drawRectangle(x+3, y+4, x+slotlength-4, y+height-2);
         return;
     }
     // function void eraseHP (int position) {

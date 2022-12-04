@@ -29,6 +29,13 @@ class NormalStair {
     // }
 
     // Construct a new Normal Stair
+    constructor NormalStair first(int y) {
+        let xPos = 150-(W/2);
+        let yPos = y;
+        let tick = 0;
+        do draw();
+        return this;
+    }
     constructor NormalStair new(int y) {
         do reset(y);
         return this;
@@ -65,22 +72,27 @@ class NormalStair {
     }
 
     // Update new state
-    method void update() {
+    method int update(int x1, int x2, int y) {
+        var int rt;
+        let rt = 0;
         let tick = tick + 1;
         if (tick = respeed) {let tick = 0;}
         // if ((tick = 0) & (yShift > 0)) {
         if (tick = 0){
             do clear();
+            if (stand_on(x1, x2, y)){
+                let rt = yShift;
+            }
             let yPos = yPos - yShift;
             // let yShift = 0;
             if (yPos < 10) {
                 // let coin = true;
-                let yPos = 258;
+                let yPos = yPos + (45*6);
                 let xPos = LCGRandom.randRange(0, boundRight);
             }
         }
         do draw();
-        return;
+        return rt;
     }
 
     // Reset
@@ -96,7 +108,7 @@ class NormalStair {
     method int stand_on(int x1, int x2, int y) {
         // y:the bottom of the player
         // x1/x2:left & right
-        if ((y = (yPos+1)) & (x2>xPos) & (x1<(xPos+W))){
+        if ((y = (yPos-1)) & (x2>xPos) & (x1<(xPos+W))){
             return 1; //normal stair
         } else {
             return 0;

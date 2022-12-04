@@ -75,26 +75,34 @@ class Player {
 
     // Clock
     method boolean fall() {
+        var int xl, xr, yd;
+        let xl = xPos;
+        let xr = xPos+childW;
+        let yd = yPos+childH;
         let tick = tick + 1;
         if (tick = 1) {let tick = 0;}
-        // if ((tick = 0) & (yShift > 0)) {
         if (tick = 0){
+            // if (s0.stand_on(xl, xr, yd) | s1.stand_on(xl, xr, yd) | s2.stand_on(xl, xr, yd) | s3.stand_on(xl, xr, yd) 
+            // | s4.stand_on(xl, xr, yd) | s5.stand_on(xl, xr, yd)){
+            //     return true;
+            // }
             if ((yPos + yVel + 1) > (boundBottom - childH)) {return false;}
             if ((yVel > 0) & (yPos < (boundBottom - childH - yVel))) {
                 let yPos = yPos + yVel;
                 let position = position + (yVel * 32);
             }
         }
-        // if (gravity) {
-        //     if ((yVel > 0) & (yPos < (boundBottom - childH - yVel))) {
-        //         let yPos = yPos + yVel;
-        //         let position = position + (yVel * 32);
-        //     }
-        // }
-        // else {
-        //     let gravity = true;
-        // }
         return true;
+    }
+    method boolean rise(int pix) {
+        // 1: pricked by the above spikes
+        // 0: otherwise
+        let yPos = yPos - pix;
+        if (yPos < (11-pix)) {
+            let yPos = yPos + (2*pix);
+            return 1;
+        }
+        return 0;
     }
 
     // Update status
