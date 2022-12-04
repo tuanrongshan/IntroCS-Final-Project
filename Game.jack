@@ -95,6 +95,7 @@ class Game {
 
     method void refresh() {
         var int xl, xr, yd;
+        var boolean standon;
         let xl = player.x();
         let xr = player.x()+childW-1;
         let yd = player.y()+childH-1;
@@ -104,7 +105,9 @@ class Game {
         do s3.update(xl, xr, yd);
         do s4.update(xl, xr, yd);
         do s5.update(xl, xr, yd);
-        if (~(player.update())){
+        let standon = ((s0.stand_on(xl, xr, yd)>0) | (s1.stand_on(xl, xr, yd)>0) | (s2.stand_on(xl, xr, yd)>0) | (s3.stand_on(xl, xr, yd)>0) 
+        | (s4.stand_on(xl, xr, yd)>0) | (s5.stand_on(xl, xr, yd)>0));
+        if (~(player.update(standon, 2))){
             do hp.injure(30);
         }
         let exit = ~hp.live();
