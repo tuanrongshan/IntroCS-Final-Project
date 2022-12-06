@@ -50,7 +50,7 @@ class NormalStair {
     // Draw stair
     method void draw() {
         var int t, d;
-        if (yPos < 512){
+        if (yPos < 255){
             do Screen.setColor(true);
             let t = Math.min(Math.max(yPos, 0),255);
             let d = Math.min(Math.max(yPos+H, 0),255);
@@ -87,7 +87,7 @@ class NormalStair {
             // let yShift = 0;
             if (yPos < 10) {
                 // let coin = true;
-                let yPos = yPos + (45*6);
+                let yPos = yPos + (46*6); // (The interval of two adjacent staris) * 6
                 let xPos = LCGRandom.randRange(0, boundRight);
             }
         }

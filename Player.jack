@@ -42,10 +42,10 @@ class Player {
             let xPos = xPos - step;
             let position = position - (step / 16);
         }
-        else {
-            let xPos = boundLeft;
-            let position = (yPos * 32) + (boundLeft / 16);
-        }
+        // else {
+        //     let xPos = boundLeft;
+        //     let position = (yPos * 32) + (boundLeft / 16);
+        // }
         return;
     }
 
@@ -56,10 +56,10 @@ class Player {
             let xPos = xPos + step;
             let position = position + (step / 16);
         }
-        else {
-            let xPos = boundRight;
-            let position = (yPos * 32) + (boundRight / 16);
-        }
+        // else {
+        //     let xPos = boundRight;
+        //     let position = (yPos * 32) + (boundRight / 16);
+        // }
         return;
     }
 
