@@ -9,6 +9,11 @@ class Game {
     field boolean exit;
     field int score;
     field int tick;
+    field int invulnerability;
+        /*
+        duration: 10 ticks
+        An invincibility or immunity to damage that occurs after the player takes damage for a short time, indicated by the player-character blinking or buffering.
+        */
 
     function void init() {
         let childH = 23;
@@ -29,6 +34,7 @@ class Game {
         let exit = 0;
         let score = 0;
         let tick = 0;
+        let invulnerability = 0;
 
         let player = Player.new(160, h-childH); //x: multiple of 16
         let hp = HP.new(312, 60, 16, 20);
@@ -96,7 +102,9 @@ class Game {
     method void refresh() {
         var int xl, xr, yd;
         var int uplift;
+        var int Dspikeabove;
         var boolean standon;
+        let Dspikeabove = 0;
         let uplift = 0;
         let xl = player.x();
         let xr = player.x()+childW-1;
@@ -112,7 +120,13 @@ class Game {
         if (~(player.update(standon))){
             do hp.injure(30);
         }
-        do player.rise(uplift);
+        // do player.rise(uplift);
+        let Dspikeabove = 5*player.rise(uplift);
+        if ((Dspikeabove>0) & (invulnerability = 0)){
+            do hp.injure(5*player.rise(uplift));
+            let invulnerability = 10;
+        }
+        if (invulnerability > 0){let invulnerability = invulnerability-1;}
         // do Output.println();
         // do Output.printInt(uplift);
         // if (standon) {do Output.printInt(standon);}
