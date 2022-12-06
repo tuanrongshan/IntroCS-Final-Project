@@ -108,6 +108,10 @@ class NormalStair {
     method int stand_on(int x1, int x2, int y) {
         // y:the bottom of the player
         // x1/x2:left & right
+        // do Output.println();
+        // do Output.printInt(y);
+        // do Output.printString(" ");
+        // do Output.printInt(yPos-1);
         if ((y = (yPos-1)) & (x2>xPos) & (x1<(xPos+W))){
             return 1; //normal stair
         } else {

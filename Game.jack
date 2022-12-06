@@ -13,7 +13,7 @@ class Game {
     function void init() {
         let childH = 23;
         let childW = 20;
-        do NormalStair.init(1);
+        do NormalStair.init(3);
         do Player.init();
         return;
     }
@@ -23,14 +23,14 @@ class Game {
         var int i;
         // let normalStairs = Array.new(5);
         // let h = 213;
-        let h = 280;
+        let h = 55;
         let i = 0;
 
         let exit = 0;
         let score = 0;
         let tick = 0;
 
-        let player = Player.new(160, h-225-childH-1); //x: multiple of 16
+        let player = Player.new(160, h-childH); //x: multiple of 16
         let hp = HP.new(312, 60, 16, 20);
 
         do map.draw();
@@ -43,12 +43,12 @@ class Game {
         // }
 
         do LCGRandom.setSeed(h*(i+10));
-        let s0 = NormalStair.first(h-225);
-        let s1 = NormalStair.new(h);
-        let s2 = NormalStair.new(h-45);
-        let s3 = NormalStair.new(h-90);
-        let s4 = NormalStair.new(h-135);
-        let s5 = NormalStair.new(h-180);
+        let s0 = NormalStair.first(h);
+        let s1 = NormalStair.new(h+45);
+        let s2 = NormalStair.new(h+90);
+        let s3 = NormalStair.new(h+135);
+        let s4 = NormalStair.new(h+180);
+        let s5 = NormalStair.new(h+225);
 
         return this;
     }
@@ -95,21 +95,27 @@ class Game {
 
     method void refresh() {
         var int xl, xr, yd;
+        var int uplift;
         var boolean standon;
+        let uplift = 0;
         let xl = player.x();
         let xr = player.x()+childW-1;
         let yd = player.y()+childH-1;
-        do s0.update(xl, xr, yd);
-        do s1.update(xl, xr, yd);
-        do s2.update(xl, xr, yd);
-        do s3.update(xl, xr, yd);
-        do s4.update(xl, xr, yd);
-        do s5.update(xl, xr, yd);
         let standon = ((s0.stand_on(xl, xr, yd)>0) | (s1.stand_on(xl, xr, yd)>0) | (s2.stand_on(xl, xr, yd)>0) | (s3.stand_on(xl, xr, yd)>0) 
         | (s4.stand_on(xl, xr, yd)>0) | (s5.stand_on(xl, xr, yd)>0));
-        if (~(player.update(standon, 2))){
+        let uplift = uplift + s0.update(xl, xr, yd);
+        let uplift = uplift + s1.update(xl, xr, yd);
+        let uplift = uplift + s2.update(xl, xr, yd);
+        let uplift = uplift + s3.update(xl, xr, yd);
+        let uplift = uplift + s4.update(xl, xr, yd);
+        let uplift = uplift + s5.update(xl, xr, yd);
+        if (~(player.update(standon))){
             do hp.injure(30);
         }
+        do player.rise(uplift);
+        // do Output.println();
+        // do Output.printInt(uplift);
+        // if (standon) {do Output.printInt(standon);}
         let exit = ~hp.live();
         do map.draw();
         return;
@@ -119,7 +125,7 @@ class Game {
         while (~exit) {
             do keyboardInput();
             do refresh();
-            do Sys.wait(20);
+            do Sys.wait(7);
         }
         return;
     }

@@ -16,7 +16,7 @@ class Player {
         let boundRight = 300;
         let boundBottom = 250;
         let step = 16;
-        let yVel = 3;
+        let yVel = 2;
         let childH = 23;
         let childW = 20;
         return;
@@ -74,7 +74,7 @@ class Player {
     */
 
     // Clock
-    method boolean fall(boolean standon, int pix) {
+    method boolean fall(boolean standon) {
         var int xl, xr, yd;
         let xl = xPos;
         let xr = xPos+childW;
@@ -89,29 +89,32 @@ class Player {
                     let position = position + (yVel * 32);
                 }
             }
-            if (standon){
-                do rise(pix);
-            }
         }
         return true;
     }
     method boolean rise(int pix) {
         // 1: pricked by the above spikes
         // 0: otherwise
+        // do Output.printString("OK!\n");
+        do erase();
         let yPos = yPos - pix;
+        let position = position - (pix * 32);
         if (yPos < (11-pix)) {
             let yPos = yPos + (2*pix);
+        let position = position + (2*pix * 32);
+            do draw();
             return 1;
         }
+        do draw();
         return 0;
     }
 
     // Update status
-    method boolean update(boolean standon, int pix) {
+    method boolean update(boolean standon) {
         // pix: stair's yShift
         var int rt;
         do erase();
-        let rt = fall(standon, pix);
+        let rt = fall(standon);
         do draw();
         return rt;
     }
