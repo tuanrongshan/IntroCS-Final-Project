@@ -1,0 +1,119 @@
+class SpikeStair {
+
+    static int W, H; // Constant int width and height
+    static int frameGap; // Constant int minimum gap length from frame to stairs
+    static int boundRight;
+    static int yShift;
+    static int respeed; //the reciprocal of speed of rising stairs
+    field int xPos, yPos; // Screen location of the stair's top-left corner
+    field int position;
+    field int tick; // internal clock
+    // field int style; //1:normal 2:spring 3:spikes
+
+    //score: the number of stairs the player passed?
+
+    // Initialize global values W, H
+    function void init(int irespeed) {
+        let W = 70;
+        let H = 10;
+        let frameGap = 50;
+        let respeed = irespeed;
+        let boundRight = 300-W;
+        let yShift = 2;
+        return;
+    }
+
+    // Up shift stairs
+    // function void shift(int s) {
+    //     let yShift = s;
+    //     return;
+    // }
+
+    // Construct a new Spike Stair
+    constructor SpikeStair first(int y) {
+        let xPos = 150-(W/2);
+        let yPos = y;
+        let position = (yPos * 32) + (xPos / 16); 
+        let tick = 0;
+        if ((position < 8000) & (position > 1000)) {do draw();}
+        return this;
+    }
+    constructor SpikeStair new(int y) {
+        do reset(y);
+        return this;
+    }
+
+    // Dispose this spike stair
+    method void dispose() {
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    // Draw stair
+    method void draw() {
+        do spikespirit.draw(position);
+        return;
+    }
+
+    // Clear stair
+    method void clear() {
+        var int t, d;
+        do Screen.setColor(false);
+        let t = Math.min(Math.max(yPos, 0),255);
+        let d = Math.min(Math.max(yPos+H, 0),255);
+        // do Screen.drawRectangle(xPos, yPos, xPos+W, yPos+H);
+        do Screen.drawRectangle(xPos, t, xPos+W, d);
+        return;
+    }
+
+    // Update new state
+    method int update(int x1, int x2, int y) {
+        var int rt;
+        let rt = 0;
+        let tick = tick + 1;
+        if (tick = respeed) {let tick = 0;}
+        // if ((tick = 0) & (yShift > 0)) {
+        if (tick = 0){
+            do clear();
+            if (stand_on(x1, x2, y)){
+                let rt = yShift;
+            }
+            let yPos = yPos - yShift;
+            let position = (yPos * 32) + (xPos / 16);
+            // let yShift = 0;
+            if (yPos < 10) {
+                // let coin = true;
+                let yPos = yPos + (46*6); // (The interval of two adjacent staris) * 6
+                let xPos = (LCGRandom.randRange(0, 27)) * 16;
+                let position = (yPos * 32) + (xPos / 16);
+            }
+        }
+        if ((position < 8000) & (position > 1000)) {do draw();}
+        return rt;
+    }
+
+    // Reset
+    method void reset(int y) {
+        // let xPos = LCGRandom.randRange(frameGap, 500-W-frameGap);
+        let xPos = (LCGRandom.randRange(0, 27)) * 16;
+        let yPos = y;
+        let position = (yPos * 32) + (xPos / 16);
+        let tick = 0;
+        if ((position < 8000) & (position > 1000)) {do draw();}
+        return;
+    }
+
+    method int stand_on(int x1, int x2, int y) {
+        // y:the bottom of the player
+        // x1/x2:left & right
+        // do Output.println();
+        // do Output.printInt(y);
+        // do Output.printString(" ");
+        // do Output.printInt(yPos-1);
+        if (((y = (yPos - 1)) & (x2>xPos) & (x1<(xPos+W))) | ((y = (yPos - 3)) & (x2 > (xPos + 3)) & (x1 < (xPos + W - 3)))){
+            return 1; //spike stair
+        } else {
+            return 0;
+        }
+    }
+}
