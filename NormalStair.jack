@@ -112,7 +112,7 @@ class NormalStair {
         // do Output.printInt(y);
         // do Output.printString(" ");
         // do Output.printInt(yPos-1);
-        if ((y = (yPos-1)) & (x2>xPos) & (x1<(xPos+W))){
+        if (((y = (yPos - 1)) & (x2>xPos) & (x1<(xPos+W))) | ((y = (yPos - 3)) & (x2 > (xPos + 3)) & (x1 < (xPos + W - 3)))){
             return 1; //normal stair
         } else {
             return 0;

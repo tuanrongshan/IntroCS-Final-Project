@@ -40,7 +40,7 @@ class HP{
     method void heal (int blood){
         var int i;
         let i = blood;
-        while ((point < 13) & (i > 0)){
+        while ((point < 12) & (i > 0)){
             let point = point+1;
             do HealthBar.drawHP(xPos+1+((point-1)*slotlength), yPos, slotlength, height);
             let i = i-1;
