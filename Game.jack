@@ -4,7 +4,7 @@ class Game {
     static boolean previous_standon;
     // field Array normalStairs;
     field NormalStair s0, s1, s3, s4, s5;
-    field SpikeStair s2;
+    // field SpikeStair s2;
     field HP hp;
     field Player player;
     field char key;
@@ -18,8 +18,8 @@ class Game {
         */
 
     function void init() {
-        let childH = 23;
-        let childW = 20;
+        let childH = child.childH();
+        let childW = child.childW();
         let previous_standon = true;
         do NormalStair.init(3);
         do SpikeStair.init(3);
@@ -55,7 +55,7 @@ class Game {
         do LCGRandom.setSeed(h*(i+10));
         let s0 = NormalStair.first(h);
         let s1 = NormalStair.new(h+46);
-        let s2 = SpikeStair.new(h+92);
+        // let s2 = SpikeStair.new(h+92);
         let s3 = NormalStair.new(h+138);
         let s4 = NormalStair.new(h+184);
         let s5 = NormalStair.new(h+230);
@@ -75,7 +75,7 @@ class Game {
         // }
         do s0.dispose();
         do s1.dispose();
-        do s2.dispose();
+        // do s2.dispose();
         do s3.dispose();
         do s4.dispose();
         do s5.dispose();
@@ -111,13 +111,13 @@ class Game {
         let Dspikeabove = 0;
         let uplift = 0;
         let xl = player.x();
-        let xr = player.x()+childW-1;
-        let yd = player.y()+childH-1;
-        let standon = ((s0.stand_on(xl, xr, yd)>0) | (s1.stand_on(xl, xr, yd)>0) | (s2.stand_on(xl, xr, yd)>0) | (s3.stand_on(xl, xr, yd)>0) 
+        let xr = player.x()+childW;
+        let yd = player.y()+childH;
+        let standon = ((s0.stand_on(xl, xr, yd)>0) | (s1.stand_on(xl, xr, yd)>0) | (s3.stand_on(xl, xr, yd)>0) 
         | (s4.stand_on(xl, xr, yd)>0) | (s5.stand_on(xl, xr, yd)>0));
         let uplift = uplift + s0.update(xl, xr, yd);
         let uplift = uplift + s1.update(xl, xr, yd);
-        let uplift = uplift + s2.update(xl, xr, yd);
+        // let uplift = uplift + s2.update(xl, xr, yd);
         let uplift = uplift + s3.update(xl, xr, yd);
         let uplift = uplift + s4.update(xl, xr, yd);
         let uplift = uplift + s5.update(xl, xr, yd);

@@ -103,16 +103,27 @@ class SpikeStair {
         return;
     }
 
-    method int stand_on(int x1, int x2, int y) {
+    method int stand_on(int xl, int xr, int y) {
         // y:the bottom of the player
-        // x1/x2:left & right
+        // xl/xr:left & right WITHOUT COUNTING DISTANCE FROM FEET
         // do Output.println();
         // do Output.printInt(y);
         // do Output.printString(" ");
         // do Output.printInt(yPos-1);
-        if (((y = (yPos - 1)) & (x2>xPos) & (x1<(xPos+W))) | ((y = (yPos - 3)) & (x2 > (xPos + 3)) & (x1 < (xPos + W - 3)))){
-            return 1; //spike stair
-        } else {
+        var int leftBound, rightBound;
+        var boolean checkY;
+        let xl = xl - 15 + distLeftFoot;
+        let xr = xr - 15 - distRightFoot;
+        let leftBound = xPos;
+        let rightBound = xPos + W;
+        let checkY = false;
+        if ((y = yPos) | ((y+1) = yPos) | ((y+2) = yPos) | ((y+3) = yPos)) {
+            let checkY = true;
+        }
+        if (checkY & (xl < rightBound) & (xr > leftBound)) {
+            return 1; //normal stair
+        } 
+        else {
             return 0;
         }
     }
