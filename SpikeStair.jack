@@ -5,6 +5,7 @@ class SpikeStair {
     static int boundRight;
     static int yShift;
     static int respeed; //the reciprocal of speed of rising stairs
+    static int distLeftFoot, distRightFoot;
     field int xPos, yPos; // Screen location of the stair's top-left corner
     field int position;
     field int tick; // internal clock
@@ -20,6 +21,8 @@ class SpikeStair {
         let respeed = irespeed;
         let boundRight = 300-W;
         let yShift = 2;
+        let distLeftFoot = 3;
+        let distRightFoot = 4;
         return;
     }
 
@@ -112,8 +115,8 @@ class SpikeStair {
         // do Output.printInt(yPos-1);
         var int leftBound, rightBound;
         var boolean checkY;
-        let xl = xl - 15 + distLeftFoot;
-        let xr = xr - 15 - distRightFoot;
+        let xl = xl + distLeftFoot;
+        let xr = xr - distRightFoot;
         let leftBound = xPos;
         let rightBound = xPos + W;
         let checkY = false;

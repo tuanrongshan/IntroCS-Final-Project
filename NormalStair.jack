@@ -117,8 +117,8 @@ class NormalStair {
         // do Output.printInt(yPos-1);
         var int leftBound, rightBound;
         var boolean checkY;
-        let xl = xl - 15 + distLeftFoot;
-        let xr = xr - 15 - distRightFoot;
+        let xl = xl + distLeftFoot;
+        let xr = xr - distRightFoot;
         let leftBound = xPos;
         let rightBound = xPos + W;
         let checkY = false;

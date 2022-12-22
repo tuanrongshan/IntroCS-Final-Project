@@ -12,7 +12,7 @@ class Player {
 
     // Initialize global variables : boundary, step, and falling velocity
     function void init() {
-        let boundLeft = 20;
+        let boundLeft = 0;
         let boundRight = 300;
         let boundBottom = 250;
         let step = 16;
@@ -124,7 +124,7 @@ class Player {
         do Screen.setColor(false);
         let t = Math.min(Math.max(yPos-1, 0),255);
         let d = Math.min(Math.max(yPos+childH-1, 0),255);
-        do Screen.drawRectangle(xPos-childW-3, t, xPos+3, d);
+        do Screen.drawRectangle(xPos-3, t, xPos+childW+3, d);
         return;
     }
 
