@@ -4,13 +4,13 @@ class spikespirit {
         var int memAddress; 
         let memAddress = 16384+location;
         // column 0
-        do Memory.poke(memAddress, 4098);
-        do Memory.poke(memAddress +32, 4098);
-        do Memory.poke(memAddress +64, 14343);
-        do Memory.poke(memAddress +96, 14343);
-        do Memory.poke(memAddress +128, 31759);
-        do Memory.poke(memAddress +160, 31759);
-        do Memory.poke(memAddress +192, -481);
+        do Memory.poke(memAddress, 128);
+        do Memory.poke(memAddress +32, 128);
+        do Memory.poke(memAddress +64, 448);
+        do Memory.poke(memAddress +96, 448);
+        do Memory.poke(memAddress +128, 992);
+        do Memory.poke(memAddress +160, 992);
+        do Memory.poke(memAddress +192, -30736);
         do Memory.poke(memAddress +224, -1);
         do Memory.poke(memAddress +256, -1);
         do Memory.poke(memAddress +288, -1);
@@ -23,13 +23,13 @@ class spikespirit {
         do Memory.poke(memAddress +512, 0);
         do Memory.poke(memAddress +544, 0);
         // column 1
-        do Memory.poke(memAddress +1, 128);
-        do Memory.poke(memAddress +33, 128);
-        do Memory.poke(memAddress +65, 448);
-        do Memory.poke(memAddress +97, 448);
-        do Memory.poke(memAddress +129, 992);
-        do Memory.poke(memAddress +161, 992);
-        do Memory.poke(memAddress +193, -30736);
+        do Memory.poke(memAddress +1, 8196);
+        do Memory.poke(memAddress +33, 8196);
+        do Memory.poke(memAddress +65, 28686);
+        do Memory.poke(memAddress +97, 28686);
+        do Memory.poke(memAddress +129, -2017);
+        do Memory.poke(memAddress +161, -2017);
+        do Memory.poke(memAddress +193, -961);
         do Memory.poke(memAddress +225, -1);
         do Memory.poke(memAddress +257, -1);
         do Memory.poke(memAddress +289, -1);
@@ -42,13 +42,13 @@ class spikespirit {
         do Memory.poke(memAddress +513, 0);
         do Memory.poke(memAddress +545, 0);
         // column 2
-        do Memory.poke(memAddress +2, 8196);
-        do Memory.poke(memAddress +34, 8196);
-        do Memory.poke(memAddress +66, 28686);
-        do Memory.poke(memAddress +98, 28686);
-        do Memory.poke(memAddress +130, -2017);
-        do Memory.poke(memAddress +162, -2017);
-        do Memory.poke(memAddress +194, -961);
+        do Memory.poke(memAddress +2, 256);
+        do Memory.poke(memAddress +34, 256);
+        do Memory.poke(memAddress +66, 896);
+        do Memory.poke(memAddress +98, 896);
+        do Memory.poke(memAddress +130, 1984);
+        do Memory.poke(memAddress +162, 1984);
+        do Memory.poke(memAddress +194, 4065);
         do Memory.poke(memAddress +226, -1);
         do Memory.poke(memAddress +258, -1);
         do Memory.poke(memAddress +290, -1);
@@ -61,13 +61,13 @@ class spikespirit {
         do Memory.poke(memAddress +514, 0);
         do Memory.poke(memAddress +546, 0);
         // column 3
-        do Memory.poke(memAddress +3, 256);
-        do Memory.poke(memAddress +35, 256);
-        do Memory.poke(memAddress +67, 896);
-        do Memory.poke(memAddress +99, 896);
-        do Memory.poke(memAddress +131, 1984);
-        do Memory.poke(memAddress +163, 1984);
-        do Memory.poke(memAddress +195, 4065);
+        do Memory.poke(memAddress +3, 16392);
+        do Memory.poke(memAddress +35, 16392);
+        do Memory.poke(memAddress +67, -8164);
+        do Memory.poke(memAddress +99, -8164);
+        do Memory.poke(memAddress +131, -4034);
+        do Memory.poke(memAddress +163, -4034);
+        do Memory.poke(memAddress +195, -1921);
         do Memory.poke(memAddress +227, -1);
         do Memory.poke(memAddress +259, -1);
         do Memory.poke(memAddress +291, -1);
@@ -80,9 +80,12 @@ class spikespirit {
         do Memory.poke(memAddress +515, 0);
         do Memory.poke(memAddress +547, 0);
         // column 4
-        do Memory.poke(memAddress +228, 0);
-        do Memory.poke(memAddress +260, 0);
-        do Memory.poke(memAddress +292, 0);
+        do Memory.poke(memAddress +132, 1);
+        do Memory.poke(memAddress +164, 1);
+        do Memory.poke(memAddress +196, 3);
+        do Memory.poke(memAddress +228, 63);
+        do Memory.poke(memAddress +260, 63);
+        do Memory.poke(memAddress +292, 63);
         do Memory.poke(memAddress +324, 0);
         do Memory.poke(memAddress +356, 0);
         do Memory.poke(memAddress +388, 0);
@@ -91,21 +94,6 @@ class spikespirit {
         do Memory.poke(memAddress +484, 0);
         do Memory.poke(memAddress +516, 0);
         do Memory.poke(memAddress +548, 0);
-        // column -1
-        do Memory.poke(memAddress +127, ~32767);
-        do Memory.poke(memAddress +159, ~32767);
-        do Memory.poke(memAddress +191, -16384);
-        do Memory.poke(memAddress +223, -1024);
-        do Memory.poke(memAddress +255, -1024);
-        do Memory.poke(memAddress +287, -1024);
-        do Memory.poke(memAddress +319, 0);
-        do Memory.poke(memAddress +351, 0);
-        do Memory.poke(memAddress +383, 0);
-        do Memory.poke(memAddress +415, 0);
-        do Memory.poke(memAddress +447, 0);
-        do Memory.poke(memAddress +479, 0);
-        do Memory.poke(memAddress +511, 0);
-        do Memory.poke(memAddress +543, 0);
         return;
     }
 

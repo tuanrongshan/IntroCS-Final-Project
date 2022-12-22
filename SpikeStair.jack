@@ -6,6 +6,7 @@ class SpikeStair {
     static int yShift;
     static int respeed; //the reciprocal of speed of rising stairs
     static int distLeftFoot, distRightFoot;
+    static int boundTop, boundBottom;
     field int xPos, yPos; // Screen location of the stair's top-left corner
     field int position;
     field int tick; // internal clock
@@ -23,6 +24,8 @@ class SpikeStair {
         let yShift = 2;
         let distLeftFoot = 3;
         let distRightFoot = 4;
+        let boundTop = 10;
+        let boundBottom = 230;
         return;
     }
 
@@ -38,7 +41,7 @@ class SpikeStair {
         let yPos = y;
         let position = (yPos * 32) + (xPos / 16); 
         let tick = 0;
-        if ((position < 8000) & (position > 1000)) {do draw();}
+        if ((yPos > boundTop) & (yPos < boundBottom)) {do draw();}
         return this;
     }
     constructor SpikeStair new(int y) {
@@ -87,22 +90,21 @@ class SpikeStair {
             if (yPos < 10) {
                 // let coin = true;
                 let yPos = yPos + (46*6); // (The interval of two adjacent staris) * 6
-                let xPos = (LCGRandom.randRange(0, 27)) * 16;
+                let xPos = (LCGRandom.randRange(0, 14)) * 16;
                 let position = (yPos * 32) + (xPos / 16);
             }
         }
-        if ((position < 8000) & (position > 1000)) {do draw();}
+        if ((yPos > boundTop) & (yPos < boundBottom)) {do draw();}
         return rt;
     }
 
     // Reset
     method void reset(int y) {
-        // let xPos = LCGRandom.randRange(frameGap, 500-W-frameGap);
-        let xPos = (LCGRandom.randRange(0, 27)) * 16;
+        let xPos = (LCGRandom.randRange(0, 14)) * 16;
         let yPos = y;
         let position = (yPos * 32) + (xPos / 16);
         let tick = 0;
-        if ((position < 8000) & (position > 1000)) {do draw();}
+        if ((yPos > boundTop) & (yPos < boundBottom)) {do draw();}
         return;
     }
 
