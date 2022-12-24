@@ -1,10 +1,10 @@
 class title_life {
 
-    function void draw_title() {
-        var int x, y, location;
-        let x = 372;
-        let y = 25;
-        let location = (x /16) + (y * 32);
+    /* size: 90 * 28 */
+
+    function void draw_title(int x, int y) {
+        var int location;
+        let location = (x / 16) + (y * 32);
         do title_life.draw(location);
         return;
     }

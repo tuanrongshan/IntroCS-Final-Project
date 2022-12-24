@@ -18,8 +18,10 @@ class map{
         do Screen.drawRectangle(0, 250, 300, 255);
         // do Screen.drawRectangle(307, 253, 511, 255);
         // Draw Title: LIFE
-        do title_life.draw_title();
-        do title_score.draw_title();
+        do title_life.draw_title(368, 25);
+        do title_score.draw_title(352, 130);
+        do title_jie.draw_title(464, 190);
+        do title_di.draw_title(320, 190);
         return;
     }
 }

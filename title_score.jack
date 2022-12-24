@@ -1,9 +1,9 @@
 class title_score {
 
-    function void draw_title() {
-        var int x, y, location;
-        let x = 352;
-        let y = 130;
+    /* size: 110 * 27 */
+
+    function void draw_title(int x, int y) {
+        var int location;
         let location = (x / 16) + (y * 32);
         do title_score.draw(location);
         return;
