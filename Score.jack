@@ -1,0 +1,57 @@
+// refer: https://github.com/N2Tstud3nt/nand2tetris-project09-Flappy-Bird/blob/master/FlappyBird/jack/Score.jack
+class Score {
+   // field int just_a_useless_variable_so_that_it_can_be_allocated_well;
+   field int total;
+    field int yPos;
+   constructor Score new(int y) {
+      let total = 0;
+      let yPos = y;
+      return this;
+   }
+
+   method void dispose() {
+      do Memory.deAlloc(this);
+      return;
+   }
+   // digit to digitImage mapper
+   method void render(int x, int v) {
+      if (v = 0) {do Digits.draw_digit0(x+(yPos*32));}
+      if (v = 1) {do Digits.draw_digit1(x+(yPos*32));}
+      if (v = 2) {do Digits.draw_digit2(x+(yPos*32));}
+      if (v = 3) {do Digits.draw_digit3(x+(yPos*32));}
+      if (v = 4) {do Digits.draw_digit4(x+(yPos*32));}
+      if (v = 5) {do Digits.draw_digit5(x+(yPos*32));}
+      if (v = 6) {do Digits.draw_digit6(x+(yPos*32));}
+      if (v = 7) {do Digits.draw_digit7(x+(yPos*32));}
+      if (v = 8) {do Digits.draw_digit8(x+(yPos*32));}
+      if (v = 9) {do Digits.draw_digit9(x+(yPos*32));}
+      return;
+   }
+
+   // handles scores in range 0...999
+   method void draw_score() {
+      var int value1, value2, value3;
+      let value1 = total - (10*(total/10));
+      let value2 = (total-(100*(total/100))) / 10;
+      let value3 = total/100;
+      if (total > 99) {
+         do render(30,value1);
+         do render(28,value2);
+         do render(26,value3);
+      } else {
+         if (total > 9) {
+            do render(30,value1);
+            do render(28,value2);
+         } else {
+            if (total > -1) {do render(30,value1);}
+         }
+      }
+      return;
+   }
+
+   method void addpoint(int points){
+      let total = total+points;
+      return;
+   }
+
+}
