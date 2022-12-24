@@ -5,7 +5,21 @@ class map{
         do Screen.setColor(false);
         do Screen.drawRectangle(300, 0, 511, 10);
         do Screen.setColor(true);
-        do Screen.drawRectangle(300, 0, 301, 255);
+        // Split Screen Line
+        do Screen.drawRectangle(300, 0, 303, 255);
+        do Screen.drawRectangle(305, 0, 307, 255);
+        // Up Boundary
+        // do Screen.drawRectangle(307, 0, 511, 2);
+        // Left Boundary
+        do Screen.drawRectangle(0, 0, 3, 255);
+        // Right Boundary
+        do Screen.drawRectangle(509, 0, 511, 255);
+        // Bottom Boundary
+        do Screen.drawRectangle(0, 250, 300, 255);
+        // do Screen.drawRectangle(307, 253, 511, 255);
+        // Draw Title: LIFE
+        do title_life.draw_title();
+        do title_score.draw_title();
         return;
     }
 }
