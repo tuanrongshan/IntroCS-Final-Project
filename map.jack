@@ -5,7 +5,12 @@ class map{
         do Screen.setColor(false);
         do Screen.drawRectangle(300, 0, 511, 10);
         do Screen.setColor(true);
-        do Screen.drawRectangle(300, 0, 301, 255);
+        // Split Screen Line
+        do Screen.drawRectangle(300, 0, 303, 255);
+        // Left Boundary
+        do Screen.drawRectangle(0, 0, 3, 255);
+        // Bottom Boundary
+        do Screen.drawRectangle(0, 250, 300, 255);
         return;
     }
 }
