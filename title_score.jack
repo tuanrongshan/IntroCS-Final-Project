@@ -3,7 +3,7 @@ class title_score {
     function void draw_title() {
         var int x, y, location;
         let x = 352;
-        let y = 125;
+        let y = 130;
         let location = (x / 16) + (y * 32);
         do title_score.draw(location);
         return;

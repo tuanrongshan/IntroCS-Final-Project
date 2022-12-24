@@ -3,7 +3,7 @@ class title_life {
     function void draw_title() {
         var int x, y, location;
         let x = 372;
-        let y = 20;
+        let y = 25;
         let location = (x /16) + (y * 32);
         do title_life.draw(location);
         return;

@@ -42,7 +42,7 @@ class Game {
         let invulnerability = 0;
 
         let player = Player.new(160, h-childH); //x: multiple of 16
-        let hp = HP.new(312, 60, 16, 20);
+        let hp = HP.new(312, 73, 16, 20);
 
         do map.draw();
 
