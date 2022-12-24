@@ -35,15 +35,15 @@ class Score {
       let value2 = (total-(100*(total/100))) / 10;
       let value3 = total/100;
       if (total > 99) {
-         do render(30,value1);
-         do render(28,value2);
-         do render(26,value3);
+         do render(27,value1);
+         do render(25,value2);
+         do render(23,value3);
       } else {
          if (total > 9) {
-            do render(30,value1);
-            do render(28,value2);
+            do render(26,value1);
+            do render(24,value2);
          } else {
-            if (total > -1) {do render(30,value1);}
+            if (total > -1) {do render(25,value1);}
          }
       }
       return;

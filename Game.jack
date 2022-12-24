@@ -47,7 +47,7 @@ class Game {
         
         let hp = HP.new(312, 73, 16, 20);
         let fall_distance = 0;
-        let scoreboard = Score.new(160);
+        let scoreboard = Score.new(180);
         do scoreboard.draw_score();
 
         do map.draw();
