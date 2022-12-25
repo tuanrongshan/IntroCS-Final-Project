@@ -1,6 +1,12 @@
 class Startscreen{
     function void startscreen(){
         var char key;
+        do Titletext.draw_t1((32*10)+4);
+        do Titletext.draw_t2((32*10)+8);
+        do Titletext.draw_t3((32*10)+12);
+        do Titletext.draw_t4((32*10)+16);
+        do Titletext.draw_t5((32*10)-(32*3)+20);
+        do Titletext.draw_t6((32*10)-(32*3)+24);
         do ArrowkeyboardImage.draw_left(5772-(32*50)-4);
         do ArrowkeyboardImage.draw_lefttext(5772+(32*16)-4);
         do ArrowkeyboardImage.draw_right(5772-(32*50)+4);
