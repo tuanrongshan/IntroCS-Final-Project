@@ -1,0 +1,19 @@
+class Startscreen{
+    function void startscreen(){
+        var char key;
+        do ArrowkeyboardImage.draw_left(5772-(32*50)-4);
+        do ArrowkeyboardImage.draw_lefttext(5772+(32*16)-4);
+        do ArrowkeyboardImage.draw_right(5772-(32*50)+4);
+        do ArrowkeyboardImage.draw_righttext(5772+(32*16)+4);
+        let key = Keyboard.keyPressed();
+        do Output.moveCursor(22, 15);
+        do Output.printString("~ Press any button to start ~");
+        while (key = 0){
+            do Sys.wait(1);
+            let key = Keyboard.keyPressed();
+        }
+        do Screen.setColor(false);
+        do Screen.drawRectangle(0, 0, 511, 255);
+        return;
+    }
+}

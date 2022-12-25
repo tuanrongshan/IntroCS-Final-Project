@@ -2,6 +2,7 @@ class Main {
 
     function void main() {
         var Game game;
+        do Startscreen.startscreen();
         do Game.init();
         let game = Game.new();
         do game.run();
