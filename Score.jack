@@ -2,9 +2,10 @@
 class Score {
    // field int just_a_useless_variable_so_that_it_can_be_allocated_well;
    field int total;
-    field int yPos;
-   constructor Score new(int y) {
+    field int xPos, yPos;
+   constructor Score new(int x, int y) {
       let total = 0;
+      let xPos = x;
       let yPos = y;
       return this;
    }
@@ -35,15 +36,15 @@ class Score {
       let value2 = (total-(100*(total/100))) / 10;
       let value3 = total/100;
       if (total > 99) {
-         do render(27,value1);
-         do render(25,value2);
-         do render(23,value3);
+         do render(xPos+4,value1);
+         do render(xPos+2,value2);
+         do render(xPos,value3);
       } else {
          if (total > 9) {
-            do render(26,value1);
-            do render(24,value2);
+            do render(xPos+3,value1);
+            do render(xPos+1,value2);
          } else {
-            if (total > -1) {do render(25,value1);}
+            if (total > -1) {do render(xPos+2,value1);}
          }
       }
       return;
@@ -52,6 +53,10 @@ class Score {
    method void addpoint(int points){
       let total = total+points;
       return;
+   }
+
+   method int returnscore(){
+      return total;
    }
 
 }

@@ -12,7 +12,6 @@ class Startscreen{
         do ArrowkeyboardImage.draw_lefttext((32*170)+10);
         do ArrowkeyboardImage.draw_right((32*100)+18);
         do ArrowkeyboardImage.draw_righttext((32*170)+18);
-        // do title_GAMEOVER.draw((32*74)+8);
         // do Output.moveCursor(7, 32);
         // do Output.printString("by Rong-Shan Tuan & Ming-Te Hong");
         

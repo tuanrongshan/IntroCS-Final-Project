@@ -30,7 +30,7 @@ class Game {
         return;
     }
 
-    constructor Game new() {
+    constructor Game new(int seed) {
         var int h;
         var int i;
         // let normalStairs = Array.new(5);
@@ -47,7 +47,7 @@ class Game {
         
         let hp = HP.new(312, 73, 16, 20);
         let fall_distance = 0;
-        let scoreboard = Score.new(180);
+        let scoreboard = Score.new(23, 180);
         do scoreboard.draw_score();
 
         do map.draw();
@@ -59,7 +59,8 @@ class Game {
         //     let i = i + 1;
         // }
 
-        do LCGRandom.setSeed(h*(i+10));
+        // do LCGRandom.setSeed(h*(i+10));
+        do LCGRandom.setSeed(seed);
         let s0 = NormalStair.first(h);
         let s1 = NormalStair.new(h+46);
         let s2 = SpikeStair.new(h+92);
@@ -86,6 +87,7 @@ class Game {
         do s3.dispose();
         do s4.dispose();
         do s5.dispose();
+        do scoreboard.dispose();
         do Memory.deAlloc(this);
         return;
     }
@@ -178,12 +180,12 @@ class Game {
         return;
     }
 
-    method void run() {
+    method int run() {
         while (~exit) {
             do keyboardInput();
             do refresh();
             do Sys.wait(7);
         }
-        return;
+        return scoreboard.returnscore();
     }
 }
