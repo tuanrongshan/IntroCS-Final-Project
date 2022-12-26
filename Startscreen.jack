@@ -1,22 +1,39 @@
 class Startscreen{
     function void startscreen(){
         var char key;
+        var int tick;
         do Titletext.draw_t1((32*10)+4);
         do Titletext.draw_t2((32*10)+8);
         do Titletext.draw_t3((32*10)+12);
         do Titletext.draw_t4((32*10)+16);
         do Titletext.draw_t5((32*10)-(32*3)+20);
         do Titletext.draw_t6((32*10)-(32*3)+24);
-        do ArrowkeyboardImage.draw_left(5772-(32*50)-4);
-        do ArrowkeyboardImage.draw_lefttext(5772+(32*16)-4);
-        do ArrowkeyboardImage.draw_right(5772-(32*50)+4);
-        do ArrowkeyboardImage.draw_righttext(5772+(32*16)+4);
-        let key = Keyboard.keyPressed();
-        do Output.moveCursor(22, 15);
+        do ArrowkeyboardImage.draw_left((32*100)+10);
+        do ArrowkeyboardImage.draw_lefttext((32*170)+10);
+        do ArrowkeyboardImage.draw_right((32*100)+18);
+        do ArrowkeyboardImage.draw_righttext((32*170)+18);
+
+        // do Output.moveCursor(7, 32);
+        // do Output.printString("by Rong-Shan Tuan & Ming-Te Hong");
+        
+        do Output.moveCursor(22, 18);
         do Output.printString("~ Press any button to start ~");
+        
+        let tick = 0;
+        let key = Keyboard.keyPressed();
         while (key = 0){
             do Sys.wait(1);
             let key = Keyboard.keyPressed();
+            if (tick = 700){
+                do Screen.setColor(false);
+                do Screen.drawRectangle(120, 240, 420, 255);
+            }
+            if (tick = 1200){
+                let tick = 0;
+                do Output.moveCursor(22, 18);
+                do Output.printString("~ Press any button to start ~");
+            }
+            let tick = tick+1;
         }
         do Screen.setColor(false);
         do Screen.drawRectangle(0, 0, 511, 255);
