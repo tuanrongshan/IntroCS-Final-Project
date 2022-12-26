@@ -1,4 +1,5 @@
 class Titletext{
+    // size: 64*64 per character
     function void draw_t1(int location) {
         var int memAddress; 
         let memAddress = 16384+location;

@@ -1,4 +1,5 @@
 class ArrowkeyboardImage{
+    // size: 64*64
     function void draw_right(int location) {
         var int memAddress; 
         let memAddress = 16384+location;
@@ -184,6 +185,7 @@ class ArrowkeyboardImage{
         do Memory.poke(memAddress +1955, 511);
         return;
     }
+    // size: 64*64
     function void draw_left(int location) {
         var int memAddress; 
         let memAddress = 16384+location;
@@ -369,6 +371,7 @@ class ArrowkeyboardImage{
         do Memory.poke(memAddress +1955, 511);
         return;
     }
+    // size: 64*32
     function void draw_righttext(int location) {
         var int memAddress; 
         let memAddress = 16384+location;
@@ -490,6 +493,7 @@ class ArrowkeyboardImage{
         do Memory.poke(memAddress +931, 24);
         return;
     }
+    // size: 64*32
     function void draw_lefttext(int location) {
         var int memAddress; 
         let memAddress = 16384+location;
