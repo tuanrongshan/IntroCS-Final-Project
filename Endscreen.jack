@@ -5,7 +5,6 @@ class Endscreen{
         do Screen.setColor(false);
         do Screen.drawRectangle(0, 0, 511, 255);
         do title_GAMEOVER.draw((32*20)+8);
-        let key = Keyboard.keyPressed();
 
         let scoreboard = Score.new(12, 160);
         do scoreboard.addpoint(score);
@@ -14,12 +13,15 @@ class Endscreen{
         // do ArrowkeyboardImage.draw_left((32*200)+10);
         // do ArrowkeyboardImage.draw_right((32*200)+18);
 
+        do Sys.wait(1000);
+
         do Output.moveCursor(20, 22);
         do Output.printString("Press right arrow to start a new game.");
         
         do Output.moveCursor(22, 22);
         do Output.printString("Press left arrow to quit the game.");
 
+        let key = Keyboard.keyPressed();
         while ((~(key = 130)) & (~(key = 132))){
             do Sys.wait(1);
             let key = Keyboard.keyPressed();
