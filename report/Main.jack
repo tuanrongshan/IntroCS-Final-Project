@@ -1,0 +1,22 @@
+class Main {
+
+    function void main() {
+        var Game game;
+        var bool play;
+        var int point;
+        var int seed;
+        do Startscreen.startscreen();
+        let play = true;
+        let seed = 550;
+        while (play){
+            do Game.init();
+            let game = Game.new(seed);
+            let point = game.run();
+            do game.dispose();
+            let play = Endscreen.endscreen(point);
+            // let seed = LCGRandom.randRange(0, 32767);
+            let seed = LCGRandom.randRange(0, 30000);
+        }
+        return;
+    }
+}
